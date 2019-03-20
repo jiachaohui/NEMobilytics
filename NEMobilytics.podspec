@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NEMobilytics"
-  s.version      = "2.1.17"
+  s.version      = "2.2.0-snapshot"
   s.summary      = "NEMobilytics is an iOS tracking tools for Netease."
 
   s.description  = <<-DESC

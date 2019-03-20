@@ -1,10 +1,10 @@
 
 #import <Foundation/Foundation.h>
-#import "DACodingDebug.h"
+#import "DAAutoTrackConfiguration.h"
+#import "DACustomAutoTrack.h"
 
-@class DADesignerConnection;
 @class DAPeople;
-
+@class UIViewController;
 /*
  @abstract
  Implement the protocol, SDK will auto track Screen Event with <getTrackProperties>,
@@ -41,8 +41,10 @@
 
  Also, this SDK adopt ARC, make sure your compiler support it.
  
- Version: 2.1.17
+ Version: 2.2.0-snapshot
  */
+typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
+
 @interface DATracker : NSObject
 
 /*
@@ -53,22 +55,19 @@
  */
 @property (atomic, readonly, strong) DAPeople *people;
 
-/**
- 编程调试类接口对象
- */
-@property (nonatomic, readonly, strong) DACodingDebug *codingDebug;
-
-/**
- 编程调试连接对象
- */
-@property (nonatomic, readonly, strong) DADesignerConnection *codingDebugDesignerConnection;
-
 /*
  Singleton class which maintains a sharedTracker throughout your application.
  The class should be accessed within code using following syntax:
  [[DATracker sharedTracker] someFunction]
  */
 + (instancetype)sharedTracker;
+
+/*
+ dynamically control sdk log
+ @level from 0...4, the higher value means you can see more detail logs
+ */
+- (NSUInteger)maxLogLevel;
+- (void)setMaxLogLevel:(NSUInteger)level;
 
 //  URL Scheme.
 - (BOOL)handleUrl:(NSURL*)url;
@@ -103,6 +102,15 @@
 - (void)startTrackerWithAppKey:(NSString *)appKey appVersion:(NSString *)appVersion
                     appChannel:(NSString *)appChannel autoUpload:(BOOL)isAutoUpload
                     sendOnWifi:(BOOL)sendOnWifi customUDID:(NSString *)udid;
+
+//check if autoTrack is enabled for the current moment
+@property(nonatomic, assign, readonly) BOOL isAutoTrackEnabled;
+
+//disable auto Track
+- (void)disableAutoTrack;
+
+//enable auto Track with configuration, using block to modify the default configuration
+- (void)enableAutoTrackConfigurationWithBlock:(AutoTrackConfigurationBlock)configBlock;
 
 // Set auto upload status
 - (void)setAutoUploadOn:(BOOL)isAutoUpload;
@@ -165,12 +173,12 @@
 /*
  If you want to record the cost time of an event
  */
-- (void)trackEvent:(NSString *)eventId costTime:(int)seconds category:(NSString *)category label:(NSString *)label;
-- (void)trackEvent:(NSString *)eventId costTime:(int)seconds category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
+- (void)trackEvent:(NSString *)eventId costTime:(double)seconds category:(NSString *)category label:(NSString *)label;
+- (void)trackEvent:(NSString *)eventId costTime:(double)seconds category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
 /*
  If you also want to record location of an event
  */
-- (void)trackEvent:(NSString *)eventId costTime:(int)seconds latitude:(double)latitude longitude:(double)longitude category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
+- (void)trackEvent:(NSString *)eventId costTime:(double)seconds latitude:(double)latitude longitude:(double)longitude category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
 
 /*
  Record search activity.
@@ -243,6 +251,13 @@
  */
 - (void)trackTimer:(NSString *)eventId;
 
+/*
+ @method
+ 
+ @abstract
+ remove a timer for the {eventId}
+ */
+- (void)removeTrackTimer:(NSString*)eventId;
 /*
  @method
  
@@ -413,12 +428,6 @@
            defaultValue:(id)defaultValue
         timeoutInterval:(NSTimeInterval)timeout
         completionBlock:(void (^)(id variableValue, NSError *error))block;
-
-/**
- 关闭编程调试连接
- */
-- (void)closeCodingDebugSocket;
-
 @end
 
 /*
@@ -612,6 +621,7 @@
  Delete current user's revenue history.
  */
 - (void)clearCharges;
+
 
 @end
 

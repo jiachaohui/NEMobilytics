@@ -56,7 +56,7 @@
  显示和隐藏版本选择列表视图
  */
 - (void)showVersionListView;
-- (void)hideVersionListViewWithCompletion:(void (^)())completion;
+- (void)hideVersionListViewWithCompletion:(void (^)(void))completion;
 
 
 /**
@@ -69,6 +69,7 @@
 /**
  强制关闭连接
  */
+- (void)connectCodingDebugWithToken:(NSString *)token;
 - (void)disconnectCodingDebug;
 
 @end
