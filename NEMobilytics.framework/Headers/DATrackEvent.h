@@ -20,7 +20,7 @@
 @interface DATrackEvent : NSObject
 
 @property(nonatomic, strong) NSString*      eventId;
-@property(nonatomic, assign) double         costTime;
+@property(nonatomic, assign) int            costTime;
 @property(nonatomic, strong) NSString*      category;
 @property(nonatomic, strong) NSString*      label;
 @property(nonatomic, strong) NSDictionary*  attributes;
@@ -28,7 +28,7 @@
 - (instancetype)initWithEventId:(NSString *)eventId attributes:(NSDictionary *)attributes;
 
 - (instancetype)initWithEventId:(NSString *)eventId
-                       costTime:(double)costTime
+                       costTime:(int)costTime
                        category:(NSString*)category
                           label:(NSString*)label
                      attributes:(NSDictionary *)attributes;

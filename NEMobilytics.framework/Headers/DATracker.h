@@ -41,7 +41,6 @@
 
  Also, this SDK adopt ARC, make sure your compiler support it.
  
- Version: 2.2.0-snapshot
  */
 typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 
@@ -64,10 +63,16 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 
 /*
  dynamically control sdk log
- @level from 0...4, the higher value means you can see more detail logs
+ @level from 0...4, the higher value means you can see more detail logs.
+ default is 0（no log）
  */
 - (NSUInteger)maxLogLevel;
 - (void)setMaxLogLevel:(NSUInteger)level;
+
+/*
+ 获取SDK版本号
+ */
+- (NSString*)getSDKVersion;
 
 //  URL Scheme.
 - (BOOL)handleUrl:(NSURL*)url;
@@ -173,12 +178,12 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 /*
  If you want to record the cost time of an event
  */
-- (void)trackEvent:(NSString *)eventId costTime:(double)seconds category:(NSString *)category label:(NSString *)label;
-- (void)trackEvent:(NSString *)eventId costTime:(double)seconds category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
+- (void)trackEvent:(NSString *)eventId costTime:(int)milliseconds category:(NSString *)category label:(NSString *)label;
+- (void)trackEvent:(NSString *)eventId costTime:(int)milliseconds category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
 /*
  If you also want to record location of an event
  */
-- (void)trackEvent:(NSString *)eventId costTime:(double)seconds latitude:(double)latitude longitude:(double)longitude category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
+- (void)trackEvent:(NSString *)eventId costTime:(int)milliseconds latitude:(double)latitude longitude:(double)longitude category:(NSString *)category label:(NSString *)label withAttributes:(NSDictionary *)attributes;
 
 /*
  Record search activity.
