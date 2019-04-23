@@ -22,6 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSString                               *appkey;
 // 用户ID，用于权限管理,是否需要password，本地权限校验如何完成？
 @property(nonatomic, strong, nullable) NSString                     *userId;
+// 请求详细数据时，设置时间区间的开始时间
+@property(nonatomic, strong, nullable) NSDate                       *fromeDate;
+// 请求详细数据时，设置时间区间的开始时间
+@property(nonatomic, strong, nullable) NSDate                       *toDate;
+// 数据类型，如：曝光、点击、等等，SDK自带的设置UI里可以设置内置类型
+@property(nonatomic, strong) NSString                               *dataType;
 // app额外信息，扩展给“定制热图方”使用
 @property(nonatomic, strong) NSDictionary                           *extraAppInfos;
 
