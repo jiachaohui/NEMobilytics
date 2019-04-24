@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 用户ID，用于权限管理,是否需要password，本地权限校验如何完成？
 @property(nonatomic, strong, nullable) NSString                     *userId;
 // 请求详细数据时，设置时间区间的开始时间
-@property(nonatomic, strong, nullable) NSDate                       *fromeDate;
+@property(nonatomic, strong, nullable) NSDate                       *fromDate;
 // 请求详细数据时，设置时间区间的开始时间
 @property(nonatomic, strong, nullable) NSDate                       *toDate;
 // 数据类型，如：曝光、点击、等等，SDK自带的设置UI里可以设置内置类型

@@ -11,6 +11,8 @@
 #import "DAHeatMapConfiguration.h"
 #import "DAHeatMapPrivilege.h"
 #import "DAHeatMapModel.h"
+#import "DAHeatMapResponseModel.h"
+#import "DAHeatMapRenderView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,41 +20,43 @@ typedef void(^HeatMapEnabledBlock)(NSError* error);
 typedef void(^HeatMapConfigBlock)(DAHeatMapConfiguration* defaultConfiguration);
 
 @class DAHeatMap;
+
 @protocol DAHeatMapDelegate <NSObject>
 
 /*
- * 拦截热图数据，自己进行处理；
- * 返回值为YES，则中断默认绘制流程，由app处理数据显示；返回NO，则继续默认绘制流程
+ * 拦截热图数据，app自己负责数据和展示的处理；
+ * 返回值为YES，则中断默认绘制流程，由app处理数据显示；
+ * 返回NO，则继续默认处理和绘制流程
  */
-- (BOOL)heatMap:(DAHeatMap *)heatmap didReceiveResponse:(NSArray *)response forModel:(NSArray *)heatmapModels;
+- (BOOL)heatMap:(DAHeatMap *)heatmap didReceiveResponse:(NSArray<DAHeatMapResponseModel *> *)responseModels;
 
 /*
- * 热图数据请求失败，请检查Error进行错误处理
+ * 热图数据请求失败
  */
-- (void)heatMap:(DAHeatMap *)heatmap FailedReceiveResponse:(NSError *)error forModel:(NSArray *)heatMapModels;
+- (void)heatMap:(DAHeatMap *)heatmap failedReceiveResponseForModels:(NSArray<DAHeatMapModel *> *)models error:(NSError*)error;
 
 /*
- * 拦截热图绘制流程，可以自己决定绘制方式,views对象是有SDK生成的渲染结果view，snapshot是截屏的view对象
+ * 拦截热图绘制流程，可以自己决定绘制方式,views对象是有SDK生成的渲染结果view，snapshotView是截屏的view对象
  */
-- (BOOL)heatMap:(DAHeatMap *)heatmap willRenderViews:(NSArray *)views onSnapshot:(UIView *)snapshotView;
+- (BOOL)heatMap:(DAHeatMap *)heatmap willRenderViews:(NSArray<DAHeatMapRenderView *> *)renderViews onSnapshot:(UIView *)snapshotView;
 
 /*
  * 编辑服务端返回response数据，并继续绘制流程
  */
-- (NSArray *)heatMap:(DAHeatMap *)heatmap filterResponse:(NSArray *)response forModel:(NSArray *)heatmapModels;
+- (NSArray<DAHeatMapResponseModel *> *)heatMap:(DAHeatMap *)heatmap filterResponse:(NSArray<DAHeatMapResponseModel *> *)response;
 
 /*
- * 成功获取到用户token，再次之后热图才算真正开始运行(isRunning=YES)，后续想用token，可以从privilege里读取
+ * 成功获取到用户token;在此之后热图才算真正开始运行(isRunning=YES)
  */
-- (void)heatMap:(DAHeatMap *)heatmap DidReceiveToken:(NSString *)token;
+- (void)heatMap:(DAHeatMap *)heatmap didReceiveToken:(NSString *)token;
 
 /*
- * 成功获取到用户token，后续想用token，可以从privilege里读取
+ * 获取热图token失败；请根据error信息提供正确的参数，再重新调用run方法
  */
-- (void)heatMap:(DAHeatMap *)heatmap FailedReceiveToken:(NSError *)error;
+- (void)heatMap:(DAHeatMap *)heatmap failedReceiveToken:(NSError *)error;
 
 /*
- * 热图功能已停止，资源已经释放，Error可为空
+ * 热图功能已停止，资源已经释放;error为空时表示调用stopRunning方法正常停止
  */
 - (void)heatMap:(DAHeatMap *)heatmap didStoppedWithError:(NSError *)error;
 
