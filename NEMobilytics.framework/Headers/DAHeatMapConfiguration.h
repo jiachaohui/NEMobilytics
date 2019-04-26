@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DAHeatMapPrivilege.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 请求详细数据时，设置时间区间的开始时间
 @property(nonatomic, strong, nullable) NSDate                       *toDate;
 // 数据类型，如：曝光、点击、等等，SDK自带的设置UI里可以设置内置类型
-@property(nonatomic, strong) NSString                               *dataType;
+@property(nonatomic, strong) DAHeatMapAccess                        *access;
 // app额外信息，扩展给“定制热图方”使用
 @property(nonatomic, strong) NSDictionary                           *extraAppInfos;
 

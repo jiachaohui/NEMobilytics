@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) NSDictionary *da_heatMapAttributes;
 
 // 由SDK自动生成的全局唯一ID
-@property(nonatomic, strong) NSString *da_heatMapId;
+@property(nonatomic, strong,readonly) NSString *da_heatMapId;
 
 // 类方法，返回NO时，该类的所有对象不参与热图
 + (BOOL)da_heatMapEnabled;

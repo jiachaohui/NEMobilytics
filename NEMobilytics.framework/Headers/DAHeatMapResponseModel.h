@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong, nullable) NSDictionary   *response;
 
+- (instancetype)initWithHeatMapModel:(DAHeatMapModel*)model response:(NSDictionary*)response;
+
 @end
 
 NS_ASSUME_NONNULL_END

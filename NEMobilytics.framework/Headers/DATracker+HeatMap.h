@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DATracker (HeatMap)
 
-@property(nonatomic, strong, readonly) DAHeatMap *heatmap;
+@property(nonatomic, strong, readonly) DAHeatMap *heatMap;
 
 @end
 

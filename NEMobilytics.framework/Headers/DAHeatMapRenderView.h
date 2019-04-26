@@ -14,10 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  * 根据数据渲染出来的结果view
  */
-@interface DAHeatMapRenderView : UIControl
+@interface DAHeatMapRenderView : UIView
 
 // 绑定的model对象
 @property(nonatomic, strong) DAHeatMapResponseModel *responseModel;
+
+- (instancetype)initWithResponseModel:(DAHeatMapResponseModel*)responseModel;
 
 @end
 
