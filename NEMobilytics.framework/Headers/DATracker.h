@@ -288,7 +288,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
  Set upload timer's interval.
  Default uploadInterval is 15 seconds.
  */
-- (void)setUploadInterval:(NSInteger)uploadInterval;
+- (void)setUploadInterval:(double)uploadInterval;
 
 /*
  @method
