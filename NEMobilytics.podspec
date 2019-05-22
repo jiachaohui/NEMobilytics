@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NEMobilytics"
-  s.version      = "2.2.1-snapshot6"
+  s.version      = "2.2.4"
   s.summary      = "NEMobilytics is an iOS tracking tools for Netease."
 
   s.description  = <<-DESC
@@ -14,6 +14,8 @@ Pod::Spec.new do |s|
   s.author             = { "jiachaohui" => "jiachaohui@corp.netease.com" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/jiachaohui/NEMobilytics.git", :tag => "#{s.version}" }
+  s.resources = ["Resources.xcassets/*.png"]
+
 
   s.vendored_frameworks = 'NEMobilytics.framework'
 
