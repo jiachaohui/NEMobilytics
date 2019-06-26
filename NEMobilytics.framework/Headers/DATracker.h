@@ -55,6 +55,14 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 @property (atomic, readonly, strong) DAPeople *people;
 
 /*
+ @property
+ @abstract
+ Accessor to session interval(seconds). Once User background spend time excced
+ sessionInterval. A New session is Created.
+ */
+@property (nonatomic, assign) NSInteger sessionInterval;
+
+/*
  Singleton class which maintains a sharedTracker throughout your application.
  The class should be accessed within code using following syntax:
  [[DATracker sharedTracker] someFunction]
@@ -215,6 +223,14 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
  @screenName screen name
  */
 - (void)trackScreen:(NSString *)screenName;
+
+/*
+ Record UserPayment
+ @amount: how much money
+ @currency: which kind of money. eg: "CNY"、"USD"
+ @properties: extra payInfo. eg: product information
+ */
+- (void)trackOrder:(double)amount currency:(NSString*)currency properties:(NSDictionary *)properties;
 
 /*
  Track an exception occurred in @try @catch block.
@@ -392,7 +408,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 - (void)clearSuperProperties;
 
 /*
- @methid
+ @method
  
  @abstract
  Set up connection between H5 and Native. This must be called after <code>startTrackerWithAppKey</code>
@@ -400,7 +416,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 - (void)addWebViewUserAgentFlag;
 
 /*
- @methid
+ @method
  
  @abstract
  Set up connection between H5 and Native.
@@ -411,7 +427,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 - (BOOL)showUpWebView:(id)webView request:(NSURLRequest *)request;
 
 /*
- @methid
+ @method
  
  @abstract
  Set up connection between H5 and Native.
@@ -433,6 +449,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
            defaultValue:(id)defaultValue
         timeoutInterval:(NSTimeInterval)timeout
         completionBlock:(void (^)(id variableValue, NSError *error))block;
+
 @end
 
 /*

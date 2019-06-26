@@ -1,4 +1,13 @@
 # iOS-SDK 更新日志
+# v2.2.7
+
+2019.6.26
+
+- 新增DATracker.sessionInterval属性，开放会话间隔控制，默认仍然为15秒。
+- 新增trackOrder方法，记录用户消费(供上海游戏部门使用)。
+- 修复双击Home强制退出app时，session close事件未上报。
+- 修复连续两次upload在间隔太短的场景下，偶尔上报的数据重复。
+
 # v2.2.6
 
 2019.5.27
