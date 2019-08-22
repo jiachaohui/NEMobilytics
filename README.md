@@ -248,9 +248,23 @@ content 为分享内容，from 为分享发生地，to 为分享目的地，比�
 
 对用户的任务进行记录，参数为任务 id 和任务失败原因，可用于用户行为完成，用户行为耗时等统计。
 
-    [[DATracker sharedTracker] trackOnMissionBegan:@"mission-1"];
-    [[DATracker sharedTracker] trackOnMissionAccomplished:@"mission-1"];
-    [[DATracker sharedTracker] trackOnMissionFailed:@"mission-2" reason:@"no power"];
+```objective-c
+[[DATracker sharedTracker] trackOnMissionBegan:@"mission-1"];
+[[DATracker sharedTracker] trackOnMissionAccomplished:@"mission-1"];
+[[DATracker sharedTracker] trackOnMissionFailed:@"mission-2" reason:@"no power"];
+```
+
+## 订单统计
+
+记录订单信息；
+
+其中amount 为订单金额，不可为空；unit 为货币单位，采用国际通用标准，例如人民币 “CNY”，不可为空；properties 为其他自定义属性，可以为空。
+
+```
+- (void)trackOrder:(double)amount currency:(NSString*)currency properties:(NSDictionary *)properties;
+```
+
+
 
 ## 打通H5和App #
 
