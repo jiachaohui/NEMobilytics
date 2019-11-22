@@ -5,28 +5,28 @@
  从2.2.0之后推荐使用pod方式接入，如果仍坚持使用静态库接入的，可以联系我。
 
 ```
-pod 'NEMobilytics', '~> 2.2.0'
+pod 'NEMobilytics', '~> 2.2.9'
 ```
 
 ## 启用 API ##
 
 在 `*AppDelegate.m` `application:didFinishLaunchingWithOptions` 方法中调用如下方法，参数依次为 app key，版本和来源渠道。
 
-    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"0.1" appChannel:@"AppStore"];
+    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"1.0" appChannel:@"AppStore"];
 
 如需要禁用 SDK 自动上传数据功能，调用
 
-    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"0.1" appChannel:@"AppStore" autoUpload:NO];
+    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"1.0" appChannel:@"AppStore" autoUpload:NO];
 
 如需要设置只在 wifi 环境下发送数据，调用
 
-    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"0.1" appChannel:@"AppStore" autoUpload:YES sendOnWifi:YES];
+    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"1.0" appChannel:@"AppStore" autoUpload:YES sendOnWifi:YES];
 
 **设置为只在 WIFI 下发送数据，会导致服务器接收数据延迟，对统计系统结果的及时性会产生影响，不建议使用**
 
 如需要使用自定义设备标识（比如 UDID），调用
 
-    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"0.1" appChannel:@"AppStore" autoUpload:YES sendOnWifi:NO deviceUDID:@"id-set-by-app"];
+    [[DATracker sharedTracker] startTrackerWithAppKey:@"app-key" appVersion:@"1.0" appChannel:@"AppStore" autoUpload:YES sendOnWifi:NO deviceUDID:@"id-set-by-app"];
 
 **App Key 可从移动分析系统网站获取，不得使用为空值或者 null**
 
@@ -115,6 +115,12 @@ pod 'NEMobilytics', '~> 2.2.0'
 **该 Device ID 并非 Apple UDID, 仅用户系统本身设备去重用途, 并且可能根据 Apple 政策做相应调整, 不保证长期唯一性**
 
 ## 用户帐号管理 ##
+
+在注册用户时，调用如下接口，统计用户注册情况
+
+```
+- (void)registerUser:(NSString*)userId;
+```
 
 在用户登录后，请调用如下接口，参数为用户帐号
 

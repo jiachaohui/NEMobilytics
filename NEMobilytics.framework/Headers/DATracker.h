@@ -156,6 +156,8 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
 
 - (void)logoutUser;
 
+- (void)registerUser:(NSString *)userId;
+
 /*
  Set user's location
  */
