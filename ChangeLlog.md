@@ -1,5 +1,14 @@
 # iOS-SDK 更新日志
+# v2.2.11
+
+2020.4.1
+
+* 修复设置isAutoUpload无效问题。
+* 移除UIWebView的相关引用。
+
 # v2.2.10
+
+2020.3.23
 
 * 统计页面时长功能默认关闭，开启需通过enableAutoTrackConfigurationWithBlock:主动打开。
 * 限制单次最大上报events数量，减少服务端峰值压力。

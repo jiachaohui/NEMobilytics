@@ -423,7 +423,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
  @abstract
  Set up connection between H5 and Native.
  
- @param webView  current webview, <code>UIWebView</code> or <code>WKWebView</code>.
+ @param webView  current webview, <code>WKWebView</code>.
  @param request  NSURLRequest.
  */
 - (BOOL)showUpWebView:(id)webView request:(NSURLRequest *)request;
@@ -434,7 +434,7 @@ typedef void(^AutoTrackConfigurationBlock)(DAAutoTrackConfiguration *config);
  @abstract
  Set up connection between H5 and Native.
  
- @param webView     Current webview, <code>UIWebView</code> or <code>WKWebView</code>.
+ @param webView     Current webview, <code>WKWebView</code>.
  @param request     NSURLRequest.
  @param properties  Properties set by user. Properties keys must be <code>NSString</code> objects and values must be
                     <code>NSString</code>, <code>NSNumber</code> objects
