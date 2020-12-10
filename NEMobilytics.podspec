@@ -14,7 +14,8 @@ Pod::Spec.new do |s|
   s.author             = { "jiachaohui" => "jiachaohui@corp.netease.com" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/jiachaohui/NEMobilytics.git", :tag => "#{s.version}" }
-
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'}
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'}
   s.vendored_frameworks = 'NEMobilytics.framework'
 
 end
